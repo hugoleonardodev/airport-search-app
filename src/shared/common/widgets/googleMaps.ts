@@ -1,7 +1,9 @@
-const googleMaps = (): void => {
-  console.log('googleMaps')
-  const start = new google.maps.LatLng(7.434_876_909_631_617, 80.442_495_123_461_3)
-  const end = new google.maps.LatLng(7.317_828_120_926_268_6, 80.873_587_889_102_8)
+const intialA = { lat: 7.434_876_909_631_617, lon: 80.442_495_123_461_3 } as ILocation
+const intialB = { lat: 7.317_828_120_926_268_6, lon: 80.873_587_889_102_8 } as ILocation
+
+const googleMaps = (locationA = intialA, locationB = intialB): void => {
+  const start = new google.maps.LatLng(locationA.lat, locationA.lon)
+  const end = new google.maps.LatLng(locationB.lat, locationB.lon)
   const option = {
     zoom: 10,
     center: start
@@ -15,8 +17,8 @@ const googleMaps = (): void => {
     destination: end,
     travelMode: 'DRIVING' as google.maps.TravelMode
   }
-  // eslint-disable-next-line space-before-function-paren
-  services.route(request, function (result, status) {
+
+  services.route(request, (result, status) => {
     if (status === 'OK') {
       display.setDirections(result)
     }

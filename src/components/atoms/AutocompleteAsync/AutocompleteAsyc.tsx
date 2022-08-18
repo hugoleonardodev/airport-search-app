@@ -11,6 +11,7 @@ interface IAutoCompleteAsyncProps {
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>
   isLoading: boolean
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
+  placeholderLabel: string
 }
 
 // function sleep(delay = 0) {
@@ -21,17 +22,18 @@ interface IAutoCompleteAsyncProps {
 
 // const ONE_SECOND = 1000
 const AUTOCOMPLETE_WIDTH = { width: 300 }
+const MIN_SEARCH_LENGTH = 2
 
 const AutocompleteAsync: React.FC<IAutoCompleteAsyncProps> = ({
   debouncedSearch,
   setSearchTerm,
   isLoading,
-  setIsLoading
+  setIsLoading,
+  placeholderLabel = 'Search'
 }) => {
   const [isOpen, setisOpen] = React.useState(false)
   const [options, setOptions] = React.useState<readonly TItem[]>([])
   const thisAutocomplete = React.useRef<AutocompleteRenderInputParams>(null)
-  // const isLoading = isOpen && options.length === 0
 
   const handleClose = React.useCallback(() => {
     setisOpen(false)
@@ -42,11 +44,11 @@ const AutocompleteAsync: React.FC<IAutoCompleteAsyncProps> = ({
   }, [])
 
   const isOptionEqualToValue = React.useCallback((option: TItem, value: TItem) => {
-    return option.name === value.name
+    return option.name === value.name || option.iata === value.iata
   }, [])
 
   const getOptionLabel = React.useCallback((option: TItem) => {
-    return option.name
+    return `${option.name}, ${option.iata}`
   }, [])
 
   const handleChange = React.useCallback(
@@ -73,7 +75,7 @@ const AutocompleteAsync: React.FC<IAutoCompleteAsyncProps> = ({
       return (
         <TextField
           {...params}
-          label="Asynchronous"
+          label={placeholderLabel}
           InputProps={inputProps(params)}
           value={debouncedSearch}
           onChange={handleChange}
@@ -84,12 +86,13 @@ const AutocompleteAsync: React.FC<IAutoCompleteAsyncProps> = ({
   )
 
   React.useEffect(() => {
-    let isActive = debouncedSearch !== '' && debouncedSearch.length > 2
+    let isActive = debouncedSearch !== '' && debouncedSearch.length > MIN_SEARCH_LENGTH
 
     if (!isLoading) {
       return
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-extra-semi
     ;(async () => {
       if (isActive) {
         const results = await getAiportByFreeText(debouncedSearch)
@@ -102,7 +105,7 @@ const AutocompleteAsync: React.FC<IAutoCompleteAsyncProps> = ({
     return () => {
       isActive = false
     }
-  }, [isLoading, debouncedSearch, setOptions, setIsLoading])
+  }, [isLoading, setIsLoading, debouncedSearch, setOptions, options])
 
   React.useEffect(() => {
     if (!isOpen) {

@@ -1,24 +1,18 @@
 import { NextPage } from 'next'
 import React from 'react'
 
-import AnchorLink from '@components/atoms/AnchorLink'
+// import AnchorLink from '@components/atoms/AnchorLink'
+import AirportDistance from '@components/organisms/AirportDistance'
 import GoogleMaps from '@components/organisms/GoogleMaps'
 
 import HomeBoxSX from '@constants/MyBox'
-import { ProductionQuantityLimitsSharp } from '@mui/icons-material'
-import { Box, Container, Typography } from '@mui/material'
+import { Box, Container } from '@mui/material'
 
 const Login: NextPage = () => {
   return (
     <Container maxWidth="lg">
       <Box sx={HomeBoxSX}>
-        <Typography variant="h4" component="h1" gutterBottom>
-          MUI v5 + Next.js with TypeScript example
-        </Typography>
-        <AnchorLink href="/home" color="secondary">
-          Go to the home page
-        </AnchorLink>
-        <ProductionQuantityLimitsSharp />
+        <AirportDistance />
       </Box>
       <GoogleMaps />
     </Container>
