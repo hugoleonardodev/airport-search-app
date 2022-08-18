@@ -1,27 +1,36 @@
 import * as React from 'react'
 
+import getAiportByFreeText from '@services/AeroDataAPI/getAirportByFreeText'
+
 import Autocomplete, { AutocompleteRenderInputParams } from '@mui/material/Autocomplete'
 import CircularProgress from '@mui/material/CircularProgress'
 import TextField from '@mui/material/TextField'
 
-interface IFilm {
-  title: string
-  year: number
+interface IAutoCompleteAsyncProps {
+  debouncedSearch: string
+  setSearchTerm: React.Dispatch<React.SetStateAction<string>>
+  isLoading: boolean
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-function sleep(delay = 0) {
-  return new Promise(resolve => {
-    setTimeout(resolve, delay)
-  })
-}
+// function sleep(delay = 0) {
+//   return new Promise(resolve => {
+//     setTimeout(resolve, delay)
+//   })
+// }
 
-const ONE_SECOND = 1000
+// const ONE_SECOND = 1000
 const AUTOCOMPLETE_WIDTH = { width: 300 }
 
-const AutocompleteAsync: React.FC = () => {
+const AutocompleteAsync: React.FC<IAutoCompleteAsyncProps> = ({
+  debouncedSearch,
+  setSearchTerm,
+  isLoading,
+  setIsLoading
+}) => {
   const [isOpen, setisOpen] = React.useState(false)
-  const [options, setOptions] = React.useState<readonly IFilm[]>([])
-  const isLoading = isOpen && options.length === 0
+  const [options, setOptions] = React.useState<readonly TItem[]>([])
+  // const isLoading = isOpen && options.length === 0
 
   const handleClose = React.useCallback(() => {
     setisOpen(false)
@@ -31,13 +40,20 @@ const AutocompleteAsync: React.FC = () => {
     setisOpen(true)
   }, [])
 
-  const isOptionEqualToValue = React.useCallback((option: IFilm, value: IFilm) => {
-    return option.title === value.title
+  const isOptionEqualToValue = React.useCallback((option: TItem, value: TItem) => {
+    return option.name === value.name
   }, [])
 
-  const getOptionLabel = React.useCallback((option: IFilm) => {
-    return option.title
+  const getOptionLabel = React.useCallback((option: TItem) => {
+    return option.name
   }, [])
+
+  const handleChange = React.useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setSearchTerm(event.currentTarget.value)
+    },
+    [setSearchTerm]
+  )
 
   const inputProps = (params: AutocompleteRenderInputParams) => {
     return {
@@ -51,35 +67,41 @@ const AutocompleteAsync: React.FC = () => {
     }
   }
 
-  const renderInput = React.useCallback((params: AutocompleteRenderInputParams) => {
-    return (
-      <TextField
-        {...params}
-        label="Asynchronous"
-        InputProps={inputProps(params)}
-      />
-    )
-  }, [inputProps])
+  const renderInput = React.useCallback(
+    (params: AutocompleteRenderInputParams) => {
+      return (
+        <TextField
+          {...params}
+          label="Asynchronous"
+          InputProps={inputProps(params)}
+          value={debouncedSearch}
+          onChange={handleChange}
+        />
+      )
+    },
+    [inputProps]
+  )
 
   React.useEffect(() => {
-    let isActive = true
+    let isActive = debouncedSearch !== '' && debouncedSearch.length > 2
 
     if (!isLoading) {
       return
     }
 
-    (async () => {
-      await sleep(ONE_SECOND) // For demo purposes.
-
+    ;(async () => {
       if (isActive) {
-        setOptions([...topFilms])
+        const results = await getAiportByFreeText(debouncedSearch)
+        console.log('results', results)
+        setOptions(results.data.items)
+        setIsLoading(false)
       }
     })()
 
     return () => {
       isActive = false
     }
-  }, [isLoading])
+  }, [isLoading, debouncedSearch, setOptions, setIsLoading])
 
   React.useEffect(() => {
     if (!isOpen) {
@@ -99,59 +121,9 @@ const AutocompleteAsync: React.FC = () => {
       options={options}
       loading={isLoading}
       renderInput={renderInput}
+      // onHighlightChange={}
     />
   )
 }
 
 export default AutocompleteAsync
-
-// Top films as rated by IMDb users. http://www.imdb.com/chart/top
-const topFilms = [
-  { title: 'The Shawshank Redemption', year: 1994 },
-  { title: 'The Godfather', year: 1972 },
-  { title: 'The Godfather: Part II', year: 1974 },
-  { title: 'The Dark Knight', year: 2008 },
-  { title: '12 Angry Men', year: 1957 },
-  { title: "Schindler's List", year: 1993 },
-  { title: 'Pulp Fiction', year: 1994 },
-  {
-    title: 'The Lord of the Rings: The Return of the King',
-    year: 2003
-  },
-  { title: 'The Good, the Bad and the Ugly', year: 1966 },
-  { title: 'Fight Club', year: 1999 },
-  {
-    title: 'The Lord of the Rings: The Fellowship of the Ring',
-    year: 2001
-  },
-  {
-    title: 'Star Wars: Episode V - The Empire Strikes Back',
-    year: 1980
-  },
-  { title: 'Forrest Gump', year: 1994 },
-  { title: 'Inception', year: 2010 },
-  {
-    title: 'The Lord of the Rings: The Two Towers',
-    year: 2002
-  },
-  { title: "One Flew Over the Cuckoo's Nest", year: 1975 },
-  { title: 'Goodfellas', year: 1990 },
-  { title: 'The Matrix', year: 1999 },
-  { title: 'Seven Samurai', year: 1954 },
-  {
-    title: 'Star Wars: Episode IV - A New Hope',
-    year: 1977
-  },
-  { title: 'City of God', year: 2002 },
-  { title: 'Se7en', year: 1995 },
-  { title: 'The Silence of the Lambs', year: 1991 },
-  { title: "It's a Wonderful Life", year: 1946 },
-  { title: 'Life Is Beautiful', year: 1997 },
-  { title: 'The Usual Suspects', year: 1995 },
-  { title: 'Léon: The Professional', year: 1994 },
-  { title: 'Spirited Away', year: 2001 },
-  { title: 'Saving Private Ryan', year: 1998 },
-  { title: 'Once Upon a Time in the West', year: 1968 },
-  { title: 'American History X', year: 1998 },
-  { title: 'Interstellar', year: 2014 }
-]

@@ -1,7 +1,7 @@
 import { NextPage } from 'next'
 import React from 'react'
 
-import AutocompleteAsync from '@components/molecules/AutocompleteAsync'
+import AirportDistance from '@components/organisms/AirportDistance'
 
 import HomeBoxSX from '@constants/MyBox'
 import { Box, Container } from '@mui/material'
@@ -10,7 +10,7 @@ const Home: NextPage = () => {
   return (
     <Container maxWidth="lg">
       <Box sx={HomeBoxSX}>
-        <AutocompleteAsync />
+        <AirportDistance />
       </Box>
     </Container>
   )
