@@ -22,6 +22,12 @@ const AirportDistance: React.FC = () => {
         isLoading={isLoading}
         setIsLoading={setIsLoading}
       />
+      <AutocompleteAsync
+        debouncedSearch={debouncedSearch}
+        setSearchTerm={setSearchTerm}
+        isLoading={isLoading}
+        setIsLoading={setIsLoading}
+      />
     </div>
   )
 }

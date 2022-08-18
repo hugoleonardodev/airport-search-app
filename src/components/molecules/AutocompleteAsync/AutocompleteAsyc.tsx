@@ -30,6 +30,7 @@ const AutocompleteAsync: React.FC<IAutoCompleteAsyncProps> = ({
 }) => {
   const [isOpen, setisOpen] = React.useState(false)
   const [options, setOptions] = React.useState<readonly TItem[]>([])
+  const thisAutocomplete = React.useRef<AutocompleteRenderInputParams>(null)
   // const isLoading = isOpen && options.length === 0
 
   const handleClose = React.useCallback(() => {
@@ -122,6 +123,7 @@ const AutocompleteAsync: React.FC<IAutoCompleteAsyncProps> = ({
       loading={isLoading}
       renderInput={renderInput}
       // onHighlightChange={}
+      ref={thisAutocomplete}
     />
   )
 }
