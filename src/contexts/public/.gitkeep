@@ -1,0 +1,5 @@
+Context que serão inciados quando a aplicação estiver na pagina de login
+
+Exemplo: AuthContext, Toast
+
+Quanto menos melhor.

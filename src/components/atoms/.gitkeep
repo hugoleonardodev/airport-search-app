@@ -1,0 +1,9 @@
+Os átomos são as menores unidades de componentes.
+
+Por exmplo um button ou um input.
+
+Não guardam estado, mas recebem props.
+
+Input ou unidades que apresentam eventos de focus ou animações, podem ser criados com React.forwardRef.
+
+https://pt-br.reactjs.org/docs/forwarding-refs.html#forwarding-refs-to-dom-components

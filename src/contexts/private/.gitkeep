@@ -1,0 +1,5 @@
+Context que serão inciados quando o usuário estiver logado.
+
+Exemplo: public + UserContext, ConfigsContext
+
+Quanto menos melhor.

@@ -1,0 +1,5 @@
+Moléculas são estruturas que possuem dois ou mais átomos.
+
+Podem apresentar alguma lógica, receber props.
+
+Precisamos saber se vamos acessar contextos a partir de moleculas ou a partir de organismos.

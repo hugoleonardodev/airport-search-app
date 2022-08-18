@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "target": "es2022",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "baseUrl": ".",
+    "paths": {
+      "@assets/*": ["./src/shared/common/assets/*"],
+      "@components/*": ["./src/components/*"],
+      "@configs/*": ["./src/shared/common/configs/*"],
+      "@containers/*": ["./src/containers/*"],
+      "@services/*": ["./src/shared/services/*"],
+      "@store/*": ["./src/store/*"],
+      "@contexts/*": ["./src/contexts/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@models/*": ["./src/models/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@styles/*": ["./src/shared/common/styles/*"],
+      "@public/*": ["./public/*"],
+      "@types/*": ["./src/@types/*"],
+      "@constants/*": ["./src/shared/common/constants/*"]
+    },
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "jsxImportSource": "@emotion/react",
+    "incremental": true
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules", "**/*.config.js"]
+}

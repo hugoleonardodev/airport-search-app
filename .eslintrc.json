@@ -1,0 +1,186 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true,
+    "es6": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@next/next/recommended",
+    "plugin:react/recommended",
+    "plugin:react-perf/recommended",
+    "plugin:unicorn/recommended",
+    "plugin:jsx-a11y/recommended",
+    "prettier",
+    "standard"
+  ],
+  "globals": {
+    "__API_URL__": "readonly",
+    "__APP_NAME__": "readonly",
+    "__IS_DEVELOPMENT__": "readonly",
+    "__IS_PRODUCTION__": "readonly"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.ts", "**/*.tsx"],
+      "parser": "@typescript-eslint/parser",
+      "extends": ["plugin:@typescript-eslint/eslint-recommended", "plugin:@typescript-eslint/recommended"],
+      "plugins": ["@typescript-eslint"],
+      "rules": {
+        "@typescript-eslint/explicit-module-boundary-types": ["error"],
+        "@typescript-eslint/no-unused-vars": ["error"],
+        "no-console": ["warn"],
+        "function-call-argument-newline": ["error", "consistent"],
+        "multiline-ternary": ["error", "never"],
+        "camelcase": ["off", { "ignoreDestructuring": true }]
+      }
+    }
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2022,
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "plugins": ["react", "prettier", "unicorn", "import-helpers", "react-perf", "jsx-a11y"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "rules": {
+    "react/prop-types": "off",
+    "function-call-argument-newline": ["error", "consistent"],
+    "unicorn/no-null": ["off", { "checkStrictEquality": true }],
+    "complexity": ["error", { "max": 20 }],
+    "max-len": [
+      "error",
+      {
+        "code": 120,
+        "tabWidth": 2,
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true,
+        "ignoreRegExpLiterals": true,
+        "ignoreComments": true,
+        "ignoreTrailingComments": true
+      }
+    ],
+    "max-lines": ["error", 300],
+    "max-nested-callbacks": ["error", 3],
+    "max-params": ["off", 4],
+    "space-before-function-paren": [
+      "error",
+      {
+        "anonymous": "never",
+        "named": "never",
+        "asyncArrow": "always"
+      }
+    ],
+    "object-curly-newline": [
+      "off",
+      {
+        "ObjectExpression": "always",
+        "ObjectPattern": { "multiline": true, "minProperties": 6 },
+        "ImportDeclaration": "never",
+        "ExportDeclaration": { "multiline": true, "minProperties": 4 }
+      }
+    ],
+    "unicorn/prevent-abbreviations": [
+      "error",
+      {
+        "allowList": {
+          "getStaticProps": true,
+          "Props": true,
+          "mod": true,
+          "params": true,
+          "playerRef": true,
+          "fireStoreDb": true,
+          "env": true,
+          "alt": true,
+          "src": true
+        }
+      }
+    ],
+    "import-helpers/order-imports": [
+      "warn",
+      {
+        "newlinesBetween": "always",
+        "groups": [
+          "module",
+          "/^@contexts/",
+          "/^@hooks/",
+          "/^@components/",
+          "/^@services/",
+          "/^@/",
+          ["parent", "sibling", "index"],
+          "/^@assets/",
+          "/^@styles/"
+        ],
+        "alphabetize": { "order": "asc", "ignoreCase": true } // alphabetical ascendent order
+      }
+    ],
+    "@typescript-eslint/no-extra-semi": ["error"],
+    "@typescript-eslint/no-magic-numbers": [
+      "error",
+      {
+        "ignoreArrayIndexes": true,
+        "ignoreDefaultValues": true,
+        "ignore": [-1, 0, 1]
+      }
+    ],
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "interface",
+        "format": ["PascalCase"],
+        "custom": {
+          "regex": "^I[A-Z]",
+          "match": true
+        }
+      },
+      {
+        "selector": "typeAlias",
+        "format": ["PascalCase"],
+        "custom": {
+          "regex": "^T[A-Z]",
+          "match": true
+        }
+      },
+      {
+        "selector": "variableLike",
+        "format": ["camelCase", "UPPER_CASE", "PascalCase", "snake_case"],
+        "leadingUnderscore": "allowSingleOrDouble",
+        "trailingUnderscore": "allowSingleOrDouble"
+      },
+      {
+        "selector": "variable",
+        "format": ["camelCase", "UPPER_CASE", "PascalCase", "snake_case"],
+        "types": ["boolean"],
+        "prefix": ["is", "IS_", "should", "SHOULD_", "has", "HAS_", "can", "CAN_", "did", "DID_", "will", "WILL_"],
+        "leadingUnderscore": "allowSingleOrDouble",
+        "trailingUnderscore": "allowSingleOrDouble"
+      },
+      {
+        "selector": "parameter",
+        "format": ["camelCase", "PascalCase", "snake_case"],
+        "leadingUnderscore": "allow"
+      },
+      {
+        "selector": "enumMember",
+        "format": ["UPPER_CASE"]
+      }
+    ],
+    "unicorn/filename-case": [
+      "off",
+      {
+        "case": "kebabCase",
+        "ignore": ["^FOOBAR\\.js$", "^(B|b)az", "\\.SOMETHING\\.js$"]
+      }
+    ]
+  }
+}
