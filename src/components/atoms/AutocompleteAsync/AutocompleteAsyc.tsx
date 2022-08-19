@@ -12,15 +12,9 @@ interface IAutoCompleteAsyncProps {
   isLoading: boolean
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
   placeholderLabel: string
+  setLocation: React.Dispatch<React.SetStateAction<ILocation>>
 }
 
-// function sleep(delay = 0) {
-//   return new Promise(resolve => {
-//     setTimeout(resolve, delay)
-//   })
-// }
-
-// const ONE_SECOND = 1000
 const AUTOCOMPLETE_WIDTH = { width: 300 }
 const MIN_SEARCH_LENGTH = 2
 
@@ -29,7 +23,8 @@ const AutocompleteAsync: React.FC<IAutoCompleteAsyncProps> = ({
   setSearchTerm,
   isLoading,
   setIsLoading,
-  placeholderLabel = 'Search'
+  placeholderLabel = 'Search',
+  setLocation
 }) => {
   const [isOpen, setisOpen] = React.useState(false)
   const [options, setOptions] = React.useState<readonly TItem[]>([])
@@ -57,6 +52,14 @@ const AutocompleteAsync: React.FC<IAutoCompleteAsyncProps> = ({
     },
     [setSearchTerm]
   )
+
+  const handleSelect = React.useCallback((event: React.SyntheticEvent<Element, Event>, option: TItem) => {
+    event.preventDefault()
+    if (option?.location) {
+      console.log('handleSelect', option.location)
+      setLocation(option.location)
+    }
+  }, [])
 
   const inputProps = (params: AutocompleteRenderInputParams) => {
     return {
@@ -125,7 +128,7 @@ const AutocompleteAsync: React.FC<IAutoCompleteAsyncProps> = ({
       options={options}
       loading={isLoading}
       renderInput={renderInput}
-      // onHighlightChange={}
+      onChange={handleSelect}
       ref={thisAutocomplete}
     />
   )

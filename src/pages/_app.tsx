@@ -5,6 +5,8 @@ import { AppProps } from 'next/app'
 import Head from 'next/head'
 import * as React from 'react'
 
+import { MainContextProvider } from '@contexts/MainContext'
+
 import createEmotionCache from '@configs/createEmotionCache'
 import theme from '@configs/theme'
 import { CacheProvider, EmotionCache } from '@emotion/react'
@@ -29,9 +31,11 @@ const MyApp: React.FC<IMyAppProps> = properties => {
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <ThemeProvider theme={theme}>
-        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-        <CssBaseline />
-        <Component {...pageProps} />
+        <MainContextProvider>
+          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+          <CssBaseline />
+          <Component {...pageProps} />
+        </MainContextProvider>
       </ThemeProvider>
     </CacheProvider>
   )
