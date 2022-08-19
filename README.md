@@ -35,6 +35,17 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 # Recommendations
 
+## ENV.LOCAL
+
+```bash
+NEXT_PUBLIC_BASE_API='https://aerodatabox.p.rapidapi.com/'
+
+NEXT_PUBLIC_BASE_API_KEY='e2e66ccea6msh8b44ae59983a3e6p187b5bjsn560c3c2d401d'
+NEXT_PUBLIC_BASE_API_HOST='aerodatabox.p.rapidapi.com'
+
+NEXT_PUBLIC_GOOGLE_API_KEY='AIzaSyA9A6PngCVXblm99gTxRq9T4Nf3qvcXUig'
+```
+
 ## ES Lint and Prettier plugins are recommended on VS Code in order to force code styles and patterns
 
 ### Some settings are also recommended on `settings.json` and you may open it with the command palette `CTRL + SHIFT + P`
