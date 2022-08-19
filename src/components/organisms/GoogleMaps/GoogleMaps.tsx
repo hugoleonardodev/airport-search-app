@@ -24,7 +24,7 @@ const GoogleMaps: React.FC = () => {
       <script
         async
         defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9A6PngCVXblm99gTxRq9T4Nf3qvcXUig&libraries=places"
+        src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}&libraries=places`}
       />
     </div>
   )

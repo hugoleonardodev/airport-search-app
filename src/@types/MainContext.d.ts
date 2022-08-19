@@ -1,3 +1,7 @@
+interface IContextProvider {
+  children?: React.ReactNode
+}
+
 interface IMainContext {
   distanceKM: number
   setDistanceKM: React.Dispatch<React.SetStateAction<number>>
