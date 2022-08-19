@@ -24,7 +24,7 @@ const AutocompleteWrap: React.FC<IAutoCompleteWrapProps> = ({ placeholderLabel, 
   }, [debouncedSearch, searchTerm])
 
   return (
-    <div ref={thisAutocomplete}>
+    <div ref={thisAutocomplete} className="autocomplete-wrap">
       <AutocompleteAsync
         debouncedSearch={debouncedSearch}
         setSearchTerm={setSearchTerm}

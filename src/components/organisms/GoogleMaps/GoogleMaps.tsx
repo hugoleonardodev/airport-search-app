@@ -14,6 +14,13 @@ const GoogleMaps: React.FC = () => {
 
   return (
     <div id="map">
+      {distanceKM === 0 && (
+        <React.Fragment>
+          <h2>Welcome to Airport Distance Service</h2>
+          <p>Search for airports and calculate the distance between it in Kilometers and Nautical Miles.</p>
+          <p>Generate Google Maps marks for the chosen airports!</p>
+        </React.Fragment>
+      )}
       <script
         async
         defer

@@ -90,3 +90,26 @@ Path Intellisense, Prettier, Rainbow Brackets, Tailwind CSS Intellisense, VS Cod
 [Code Splitting PT-BR](https://pt-br.reactjs.org/docs/code-splitting.html)
 
 [When to use memo PT-BR](https://pt-br.reactjs.org/docs/react-api.html#reactmemo)
+
+### Final thoughts
+
+This boilerplate is following the Material UI recommendations. [MUI NextJS with Typescript](https://github.com/mui/material-ui/tree/master/examples/nextjs-with-typescript)
+It is taking some time to get the first load. Probably because of the cache and getInitialProps configurations from MUI.
+Personally, I would create this application with Webpack and Babel. Because it is faster. And NextJS has a lot of production features that must be considered.
+There is a lot of work to do to make this application production ready. Like manual tests, end to end tests, improve the performance, features, and so on.
+I believe that this prototype or MVP is meeting the requirements of the project.
+
+Thanks for the opportunity to share this project with you. I would love to share my thoughts on a meeting.
+
+### Contacts
+
+[LinkedIn](https://www.linkedin.com/in/hugo-leonardo-matosinhos-de-souza/)
+[GitHub](https://github.com/hugoleonardodev)
+
+```bash
+hugoleonardo.dev@gmail.com
+```
+
+```bash
++5531999699361
+```
