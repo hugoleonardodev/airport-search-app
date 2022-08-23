@@ -10,7 +10,7 @@ import { Grid } from '@mui/material'
 const AIRPORT_DISTANCE_COLUMNS = { xs: 2, sm: 8, md: 12 }
 
 const AirportDistance: React.FC = () => {
-  const { setLocationA, setLocationB, distanceKM, distanceNM } = useMainContext()
+  const { setLocationA, setLocationB, distanceNM } = useMainContext()
   return (
     <Grid container columns={AIRPORT_DISTANCE_COLUMNS}>
       <Grid xs={2} sm={4} md={4} item>
@@ -18,11 +18,6 @@ const AirportDistance: React.FC = () => {
       </Grid>
       <Grid xs={2} sm={4} md={4} item>
         <AutocompleteWrap placeholderLabel="Select Location B" setLocation={setLocationB} />
-      </Grid>
-      <Grid xs={2} sm={4} md={4} item display="flex" alignItems="end">
-        <p>
-          Kilometers distance: <strong>{distanceKM.toFixed(__TWO__)}</strong>{' '}
-        </p>
       </Grid>
       <Grid xs={2} sm={4} md={4} item display="flex" alignItems="end">
         <p>

@@ -1,32 +1,9 @@
 import { __TWO__ } from '@constants/globals'
 
+import { getZoomByDistance } from '../utils'
+
 const intialA = { lat: '7.434_876_909_631_617', lon: '80.442_495_123_461_3' } as ILocation
 const intialB = { lat: '7.317_828_120_926_268_6', lon: '80.873_587_889_102_8' } as ILocation
-
-const ZOOM_TWO_TIMES = 2
-const ZOOM_FOUR_TIMES = 4
-const ZOOM_SIX_TIMES = 6
-const ZOOM_EIGHT_TIMES = 8
-
-const ONE_KM = 1
-const FIVE_HUNDRED_KM = 500
-const ONE_THOUSAND_KM = 1000
-const FIVE_THOUSAND_KM = 5000
-
-const getZoomByDistance = (distance: number): number => {
-  if (distance >= FIVE_THOUSAND_KM) {
-    return ZOOM_TWO_TIMES
-  }
-  if (distance > ONE_THOUSAND_KM && distance < FIVE_THOUSAND_KM) {
-    return ZOOM_FOUR_TIMES
-  }
-  if (distance > FIVE_HUNDRED_KM && distance < ONE_THOUSAND_KM) {
-    return ZOOM_SIX_TIMES
-  }
-  if (distance > ONE_KM && distance < FIVE_HUNDRED_KM) {
-    return ZOOM_EIGHT_TIMES
-  }
-}
 
 const googleMaps = (locationA = intialA, locationB = intialB, distance = 5000): void => {
   const start = new google.maps.LatLng(Number(locationA.lat), Number(locationA.lon))
@@ -56,6 +33,17 @@ const googleMaps = (locationA = intialA, locationB = intialB, distance = 5000): 
   if (markerA && markerB) {
     markerB.setMap(map)
   }
+
+  // see https://stackoverflow.com/questions/51816751/draw-lines-between-multiple-markers-on-google-map-using-java-script
+  const line = new google.maps.Polyline({
+    path: [start, end],
+    geodesic: true,
+    strokeColor: '#FF0000',
+    strokeOpacity: 1,
+    strokeWeight: 2
+  })
+
+  line.setMap(map)
   // To add the marker to the map, call setMap();
   // markerA.setMap(map)
   // display.setMap(map)
