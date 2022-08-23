@@ -20,12 +20,12 @@ interface IAirport {
   iata: string
   latitude: string
   longitude: string
-  country: Country
-  state: State
+  country: ICountry
+  state: IState
 }
 
 interface IAeroDataAPIResponse {
-  airports: Airport[]
+  airports: IAirport[]
   term: string
   limit: string
   size: number

@@ -2,6 +2,7 @@ import * as React from 'react'
 
 import getAiportByFreeText from '@services/AeroDataAPI/getAirportByFreeText'
 
+import { RESPONSE_STATUS_404 } from '@constants/globals'
 import Autocomplete, { AutocompleteRenderInputParams } from '@mui/material/Autocomplete'
 import CircularProgress from '@mui/material/CircularProgress'
 import TextField from '@mui/material/TextField'
@@ -13,6 +14,7 @@ interface IAutoCompleteAsyncProps {
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
   placeholderLabel: string
   setLocation: React.Dispatch<React.SetStateAction<ILocation>>
+  isDisabled?: boolean
 }
 
 const AUTOCOMPLETE_WIDTH = { width: 300 }
@@ -24,7 +26,8 @@ const AutocompleteAsync: React.FC<IAutoCompleteAsyncProps> = ({
   isLoading,
   setIsLoading,
   placeholderLabel = 'Search',
-  setLocation
+  setLocation,
+  isDisabled = false
 }) => {
   const [isOpen, setisOpen] = React.useState(false)
   const [options, setOptions] = React.useState<readonly IAirport[]>([])
@@ -53,14 +56,17 @@ const AutocompleteAsync: React.FC<IAutoCompleteAsyncProps> = ({
     [setSearchTerm]
   )
 
-  const handleSelect = React.useCallback((event: React.SyntheticEvent<Element, Event>, option: IAirport) => {
-    event.preventDefault()
-    if (option?.city) {
-      console.log('handleSelect', option)
-      const currentLocation = { lat: option.latitude, lon: option.longitude }
-      setLocation(currentLocation)
-    }
-  }, [])
+  const handleSelect = React.useCallback(
+    (event: React.SyntheticEvent<Element, Event>, option: IAirport) => {
+      event.preventDefault()
+      if (option?.city) {
+        console.log('handleSelect', option)
+        const currentLocation = { lat: option.latitude, lon: option.longitude }
+        setLocation(currentLocation)
+      }
+    },
+    [setLocation]
+  )
 
   const inputProps = (params: AutocompleteRenderInputParams) => {
     return {
@@ -96,15 +102,23 @@ const AutocompleteAsync: React.FC<IAutoCompleteAsyncProps> = ({
       return
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-extra-semi
-    ;(async () => {
-      if (isActive) {
-        const results = await getAiportByFreeText(debouncedSearch)
-        console.log('results', results)
-        setOptions(results.data.airports)
-        setIsLoading(false)
-      }
-    })()
+    if (isActive) {
+      getAiportByFreeText(debouncedSearch)
+        .then(response => {
+          console.log('apiResponse', response)
+          if (response.data.statusCode === RESPONSE_STATUS_404) {
+            setOptions([])
+            return setIsLoading(false)
+          }
+          setOptions(response.data.airports)
+          setIsLoading(false)
+        })
+        .catch((error: Error) => {
+          console.log('error.message', error.message)
+          setOptions([])
+          setIsLoading(false)
+        })
+    }
 
     return () => {
       isActive = false
@@ -119,7 +133,6 @@ const AutocompleteAsync: React.FC<IAutoCompleteAsyncProps> = ({
 
   return (
     <Autocomplete
-      id="asynchronous-demo"
       sx={AUTOCOMPLETE_WIDTH}
       open={isOpen}
       onOpen={handleOpen}
@@ -130,6 +143,9 @@ const AutocompleteAsync: React.FC<IAutoCompleteAsyncProps> = ({
       loading={isLoading}
       renderInput={renderInput}
       onChange={handleSelect}
+      noOptionsText="Airport not found."
+      loadingText="Searching Airports..."
+      disabled={isDisabled}
       ref={thisAutocomplete}
     />
   )

@@ -13,20 +13,26 @@ const GoogleMaps: React.FC = () => {
   }, [locationA, locationB])
 
   return (
-    <div id="map">
-      {distanceKM === 0 && (
-        <React.Fragment>
+    <React.Fragment>
+      {distanceKM === 0 ? (
+        <div id="map">
           <h2>Welcome to Airport Distance Service</h2>
-          <p>Search for airports and calculate the distance between it in Kilometers and Nautical Miles.</p>
-          <p>Generate Google Maps marks for the chosen airports!</p>
+          <p>Search for airports and calculate the distance between it in Nautical Miles.</p>
+          <p>Generate Google Maps marks for the chosen airports and trace the line between it!</p>
+        </div>
+      ) : (
+        <React.Fragment>
+          <div id="map">
+            <script
+              async
+              defer
+              src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}&libraries=places`}
+            />
+          </div>
+          <footer>Thanks for using the app.</footer>
         </React.Fragment>
       )}
-      <script
-        async
-        defer
-        src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}&libraries=places`}
-      />
-    </div>
+    </React.Fragment>
   )
 }
 

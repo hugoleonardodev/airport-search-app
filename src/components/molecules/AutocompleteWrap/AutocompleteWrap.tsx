@@ -9,9 +9,10 @@ import { ONE_SECOND } from '@constants/globals'
 interface IAutoCompleteWrapProps {
   placeholderLabel: string
   setLocation: React.Dispatch<React.SetStateAction<ILocation>>
+  isDisabled?: boolean
 }
 
-const AutocompleteWrap: React.FC<IAutoCompleteWrapProps> = ({ placeholderLabel, setLocation }) => {
+const AutocompleteWrap: React.FC<IAutoCompleteWrapProps> = ({ placeholderLabel, setLocation, isDisabled = false }) => {
   const [searchTerm, setSearchTerm] = React.useState<string>('')
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
   const debouncedSearch = useDebounce<string>(searchTerm, ONE_SECOND)
@@ -32,6 +33,7 @@ const AutocompleteWrap: React.FC<IAutoCompleteWrapProps> = ({ placeholderLabel, 
         setIsLoading={setIsLoading}
         placeholderLabel={placeholderLabel}
         setLocation={setLocation}
+        isDisabled={isDisabled}
       />
     </div>
   )

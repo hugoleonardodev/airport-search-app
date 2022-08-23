@@ -1,4 +1,7 @@
-const ONE_SECOND = 1000
 const __TWO__ = 2
 
-export { __TWO__, ONE_SECOND }
+const ONE_SECOND = 1000
+
+const RESPONSE_STATUS_404 = 404
+
+export { __TWO__, ONE_SECOND, RESPONSE_STATUS_404 }

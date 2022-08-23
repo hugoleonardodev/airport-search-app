@@ -42,7 +42,7 @@ export const MainContextProvider: React.FC<IContextProvider> = ({ children }) =>
       locationB,
       setLocationB
     }),
-    [distanceKM, distanceNM]
+    [distanceKM, distanceNM, locationA]
   )
 
   return <MainContext.Provider value={contextValues}>{children}</MainContext.Provider>
