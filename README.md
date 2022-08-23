@@ -33,15 +33,70 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
+# Requirements
+
+Build a web app that calculates the distance between two airports in nautical miles, using auto-complete for the airport fields.
+
+1. Airports should be searchable by name or 3 digit code;
+   It is possible to search for a free term. Although, the first API recommended for the test was returning better results
+
+2. Use an autocomplete component;
+   Autocomplete is working good with the Material UI component.
+
+3. Use Material UI;
+   Autocomplete components and recommendations for NEXTJS from [https://github.com/mui/material-ui/tree/master/examples/nextjs-with-typescript](https://github.com/mui/material-ui/tree/master/examples/nextjs-with-typescript)
+
+4. Only show nautical miles distance, KM don't matter;
+   Nautical miles calculation is available
+
+5. Make a self-test in the application;
+   Do you mean automated tests? I have manually tested a bit. But it is not 100% tested.
+
+6. Validate if the API works well with many airports;
+   Well, this application only calculates the distance between TWO airports.
+
+7. Validate if the interface works well in mobile;
+   Yes. It is working good for most mobile devices.
+
+8. Validate if the calculation is correct.
+   I have verified the result for a few distances. And there is a small difference between the results. ~0.02
+
+## You will be evaluated based on
+
+1. The structure of your React components, HTML and CSS structure;
+   Atomice Design [Atomic Design](https://atomicdesign.bradfrost.com/) is a design system that helps you build beautiful, usable, and accessible web apps.
+
+2. Use of Material UI components;
+   Material UI is cool but the API changes a lot, because they are always updating. But I believe I can master it.
+
+3. The cleanliness (or whatever else you care about) of your visual design;
+   I'm not a designer. I can help the designers to find the best solution for the app. But I'm not a designer.
+
+4. Appropriate use of TypeScript;
+   Yes, we love Typescript.
+
+5. Being mobile friendly;
+   Mobile First!
+
+6. Messages displayed to the user and error handling.
+   There are some messages. We could customize more. Track some bugs. Write tests. Handling all errors. But it takes a lot of time...
+
+**_ Bonus _**: plot the route (with line, not car or other type of route) on Google maps. Make more than required, like put animations, make an PWA, etc. Use imagination to deliver the best user experience.
+There is a marker with a line between it on the map.
+Animations while searching for results (Tanks MUI Autocomplete)!
+PWA is a good catch. But It has been a while since the last time I tried to do it. I can try to it with more time.
+
 # Recommendations
 
 ## ENV.LOCAL
 
-```bash
-NEXT_PUBLIC_BASE_API='https://aerodatabox.p.rapidapi.com/'
+Sorry for this. I know it is not a good practice. Just for sharing proposes.
 
-NEXT_PUBLIC_BASE_API_KEY='e2e66ccea6msh8b44ae59983a3e6p187b5bjsn560c3c2d401d'
-NEXT_PUBLIC_BASE_API_HOST='aerodatabox.p.rapidapi.com'
+```bash
+NEXT_PUBLIC_BASE_API='https://www.air-port-codes.com/api/v1/'
+
+NEXT_PUBLIC_BASE_API_KEY='a3063d49cf'
+NEXT_PUBLIC_BASE_API_HOST='www.air-port-codes.com'
 
 NEXT_PUBLIC_GOOGLE_API_KEY='AIzaSyA9A6PngCVXblm99gTxRq9T4Nf3qvcXUig'
 ```
@@ -52,11 +107,10 @@ NEXT_PUBLIC_GOOGLE_API_KEY='AIzaSyA9A6PngCVXblm99gTxRq9T4Nf3qvcXUig'
 
 ```json
 {
-  "auto-close-tag.activationOnLanguage": ["*"], // removes warning about @apply and tailwind decorators
   "editor.autoClosingBrackets": "always",
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-    // "source.fixAll.prettier": false // pode ser preciso explicitar isso, mas no meu tá comentado
+    "source.fixAll.eslint": true,
+    "source.fixAll.prettier": true
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
@@ -86,21 +140,11 @@ ES Lint and Prettier, lattest version
 
 Auto Close Tag, Auto Rename Tag, CodeMetrics, Color Highlight, DotEnv, Dracula Official, EditorConfig, ESLint, Git History,
 GitHub Copilot, GitLens, Import Cost, IntelliCode, IntelliSense for CSS class names in HTML, Live Server, Live Share, MDX,
-Path Intellisense, Prettier, Rainbow Brackets, Tailwind CSS Intellisense, VS Code Counter, vscode-styled-components, Zoom Bar
+Path Intellisense, Prettier, Rainbow Brackets, VS Code Counter, vscode-styled-components, Zoom Bar
 
-### Atomic Design and custom components library
+### Atomic Design
 
 [Atomic Design](https://atomicdesign.bradfrost.com/) is a design system that helps you build beautiful, usable, and accessible web apps.
-
-[Article PT-BR](https://medium.com/rd-shipit/como-criar-componentes-react-com-uma-arquitetura-escal%C3%A1vel-usando-atomic-design-74a67aaf47e0) how to create react components with scalable architecture using atomic design.
-
-[GitHub Repo](https://github.com/danilowoz/react-atomic-design)
-
-[Forwarding Refs PT-BR](https://pt-br.reactjs.org/docs/forwarding-refs.html#forwarding-refs-to-dom-components)
-
-[Code Splitting PT-BR](https://pt-br.reactjs.org/docs/code-splitting.html)
-
-[When to use memo PT-BR](https://pt-br.reactjs.org/docs/react-api.html#reactmemo)
 
 ### Final thoughts
 
