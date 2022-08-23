@@ -7,7 +7,7 @@ const GoogleMaps: React.FC = () => {
   const { locationA, locationB, distanceKM } = useMainContext()
 
   React.useEffect(() => {
-    if (locationA.lat !== 0 && locationA.lon !== 0 && locationB.lat !== 0 && locationB.lon !== 0) {
+    if (locationA.lat !== '0' && locationA.lon !== '0' && locationB.lat !== '0' && locationB.lon !== '0') {
       googleMaps(locationA, locationB, distanceKM)
     }
   }, [locationA, locationB])

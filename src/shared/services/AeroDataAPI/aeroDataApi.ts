@@ -5,8 +5,7 @@ const aeroDataApi = (): AxiosInstance => {
     const api = axios.create({
       baseURL: `${process.env.NEXT_PUBLIC_BASE_API}`,
       headers: {
-        'X-RapidAPI-Key': `${process.env.NEXT_PUBLIC_BASE_API_KEY}`,
-        'X-RapidAPI-Host': `${process.env.NEXT_PUBLIC_BASE_API_HOST}`,
+        'APC-Auth': `${process.env.NEXT_PUBLIC_BASE_API_KEY}`,
         'Content-Type': 'application/json'
       }
     })

@@ -1,19 +1,35 @@
 interface ILocation {
-  lat: number
-  lon: number
+  lat: string
+  lon: string
 }
 
-type TItem = {
-  icao: string
-  iata: string
-  localCode: string
+interface ICountry {
   name: string
-  shortName: string
-  municipalityName: string
-  location: ILocation
-  countryCode: string
+  iso: string
+}
+
+interface IState {
+  name: string
+  abbr: string
+  type: string
+}
+
+interface IAirport {
+  name: string
+  city: string
+  iata: string
+  latitude: string
+  longitude: string
+  country: Country
+  state: State
 }
 
 interface IAeroDataAPIResponse {
-  items: TItem[]
+  airports: Airport[]
+  term: string
+  limit: string
+  size: number
+  cached: boolean
+  status: boolean
+  statusCode: number
 }

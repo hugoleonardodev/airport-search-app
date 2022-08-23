@@ -27,7 +27,7 @@ const AutocompleteAsync: React.FC<IAutoCompleteAsyncProps> = ({
   setLocation
 }) => {
   const [isOpen, setisOpen] = React.useState(false)
-  const [options, setOptions] = React.useState<readonly TItem[]>([])
+  const [options, setOptions] = React.useState<readonly IAirport[]>([])
   const thisAutocomplete = React.useRef<AutocompleteRenderInputParams>(null)
 
   const handleClose = React.useCallback(() => {
@@ -38,11 +38,11 @@ const AutocompleteAsync: React.FC<IAutoCompleteAsyncProps> = ({
     setisOpen(true)
   }, [])
 
-  const isOptionEqualToValue = React.useCallback((option: TItem, value: TItem) => {
+  const isOptionEqualToValue = React.useCallback((option: IAirport, value: IAirport) => {
     return option.name === value.name || option.iata === value.iata
   }, [])
 
-  const getOptionLabel = React.useCallback((option: TItem) => {
+  const getOptionLabel = React.useCallback((option: IAirport) => {
     return `${option.name}, ${option.iata}`
   }, [])
 
@@ -53,11 +53,12 @@ const AutocompleteAsync: React.FC<IAutoCompleteAsyncProps> = ({
     [setSearchTerm]
   )
 
-  const handleSelect = React.useCallback((event: React.SyntheticEvent<Element, Event>, option: TItem) => {
+  const handleSelect = React.useCallback((event: React.SyntheticEvent<Element, Event>, option: IAirport) => {
     event.preventDefault()
-    if (option?.location) {
-      console.log('handleSelect', option.location)
-      setLocation(option.location)
+    if (option?.city) {
+      console.log('handleSelect', option)
+      const currentLocation = { lat: option.latitude, lon: option.longitude }
+      setLocation(currentLocation)
     }
   }, [])
 
@@ -100,7 +101,7 @@ const AutocompleteAsync: React.FC<IAutoCompleteAsyncProps> = ({
       if (isActive) {
         const results = await getAiportByFreeText(debouncedSearch)
         console.log('results', results)
-        setOptions(results.data.items)
+        setOptions(results.data.airports)
         setIsLoading(false)
       }
     })()

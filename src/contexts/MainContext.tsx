@@ -9,8 +9,8 @@ export const MainContextProvider: React.FC<IContextProvider> = ({ children }) =>
   const [distanceKM, setDistanceKM] = React.useState<number>(0)
   const [distanceNM, setDistanceNM] = React.useState<number>(0)
 
-  const [locationA, setLocationA] = React.useState<ILocation>({ lat: 0, lon: 0 })
-  const [locationB, setLocationB] = React.useState<ILocation>({ lat: 0, lon: 0 })
+  const [locationA, setLocationA] = React.useState<ILocation>({ lat: '0', lon: '0' })
+  const [locationB, setLocationB] = React.useState<ILocation>({ lat: '0', lon: '0' })
 
   const calculateDistanceInKM = React.useCallback(() => {
     const distanceInKM = getDistanceFromLatLonInKm(locationA.lat, locationA.lon, locationB.lat, locationB.lon)
@@ -23,7 +23,7 @@ export const MainContextProvider: React.FC<IContextProvider> = ({ children }) =>
   }, [distanceKM])
 
   React.useEffect(() => {
-    if (locationA.lat !== 0 && locationA.lon !== 0 && locationB.lat !== 0 && locationB.lon !== 0) {
+    if (locationA.lat !== '0' && locationA.lon !== '0' && locationB.lat !== '0' && locationB.lon !== '0') {
       calculateDistanceInKM()
     }
   }, [locationA, locationB])
