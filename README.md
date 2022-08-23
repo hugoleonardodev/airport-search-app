@@ -85,6 +85,15 @@ Build a web app that calculates the distance between two airports in nautical mi
 There is a marker with a line between it on the map.
 Animations while searching for results (Tanks MUI Autocomplete)!
 PWA is a good catch. But It has been a while since the last time I tried to do it. I can try to it with more time.
+Debounce hook to delay the request. While the users is typing the search term. To avoid multiple API calls.
+
+## TO DO
+
+1. Sanitization
+
+2. End-to-End tests
+
+3. Improve UI/UX
 
 # Recommendations
 
@@ -100,51 +109,6 @@ NEXT_PUBLIC_BASE_API_HOST='www.air-port-codes.com'
 
 NEXT_PUBLIC_GOOGLE_API_KEY='AIzaSyA9A6PngCVXblm99gTxRq9T4Nf3qvcXUig'
 ```
-
-## ES Lint and Prettier plugins are recommended on VS Code in order to force code styles and patterns
-
-### Some settings are also recommended on `settings.json` and you may open it with the command palette `CTRL + SHIFT + P`
-
-```json
-{
-  "editor.autoClosingBrackets": "always",
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true,
-    "source.fixAll.prettier": true
-  },
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": true,
-  "editor.suggestSelection": "first",
-  "editor.tabCompletion": "on",
-  "editor.tabSize": 2,
-  "editor.inlineSuggest.enabled": true,
-  "emmet.showSuggestionsAsSnippets": true,
-  "emmet.includeLanguages": {
-    "javascript": "javascriptreact",
-    "ejs": "html"
-  },
-  "eslint.useESLintClass": true,
-  "eslint.workingDirectories": ["./"],
-  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
-  "javascript.updateImportsOnFileMove.enabled": "always"
-}
-```
-
-### VS Code Extensions
-
-- Necessary for linter and format code:
-
-ES Lint and Prettier, lattest version
-
-- Recommendations:
-
-Auto Close Tag, Auto Rename Tag, CodeMetrics, Color Highlight, DotEnv, Dracula Official, EditorConfig, ESLint, Git History,
-GitHub Copilot, GitLens, Import Cost, IntelliCode, IntelliSense for CSS class names in HTML, Live Server, Live Share, MDX,
-Path Intellisense, Prettier, Rainbow Brackets, VS Code Counter, vscode-styled-components, Zoom Bar
-
-### Atomic Design
-
-[Atomic Design](https://atomicdesign.bradfrost.com/) is a design system that helps you build beautiful, usable, and accessible web apps.
 
 ### Final thoughts
 
