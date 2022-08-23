@@ -86,6 +86,7 @@ There is a marker with a line between it on the map.
 Animations while searching for results (Tanks MUI Autocomplete)!
 PWA is a good catch. But It has been a while since the last time I tried to do it. I can try to it with more time.
 Debounce hook to delay the request. While the users is typing the search term. To avoid multiple API calls.
+Centers the map between distances but with Eurocentric vision (need to improve).
 
 ## TO DO
 

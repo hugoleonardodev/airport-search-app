@@ -22,13 +22,7 @@ const GoogleMaps: React.FC = () => {
         </div>
       ) : (
         <React.Fragment>
-          <div id="map">
-            <script
-              async
-              defer
-              src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}&libraries=places`}
-            />
-          </div>
+          <div id="map"></div>
           <footer>Thanks for using the app.</footer>
         </React.Fragment>
       )}

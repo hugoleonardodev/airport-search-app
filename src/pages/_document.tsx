@@ -12,14 +12,17 @@ class HTMLDocument extends Document {
     return (
       <Html lang="pt-BR">
         <Head>
-          {/* Warning: viewport meta tags should not be used in _document.js's <Head>. https://nextjs.org/docs/messages/no-document-viewport-meta */}
-          {/* <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=1" /> */}
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         </Head>
         <body>
           <Main />
           <NextScript />
+          <script
+            async
+            defer
+            src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}&libraries=places`}
+          />
         </body>
       </Html>
     )
