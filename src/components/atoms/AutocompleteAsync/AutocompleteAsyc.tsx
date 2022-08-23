@@ -60,7 +60,6 @@ const AutocompleteAsync: React.FC<IAutoCompleteAsyncProps> = ({
     (event: React.SyntheticEvent<Element, Event>, option: IAirport) => {
       event.preventDefault()
       if (option?.city) {
-        console.log('handleSelect', option)
         const currentLocation = { lat: option.latitude, lon: option.longitude }
         setLocation(currentLocation)
       }
